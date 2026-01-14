@@ -1,6 +1,12 @@
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import '@/app/globals.css';
+
+type RootLayoutProps = Readonly<{
+  children: React.ReactNode;
+}>;
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body>{children}</body>
     </html>
   );
