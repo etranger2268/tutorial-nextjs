@@ -1,9 +1,11 @@
 import { CalendarIcon } from '@heroicons/react/24/outline';
+import { fetchRevenue } from '@/app/lib/data';
 import type { Revenue } from '@/app/lib/definitions';
 import { generateYAxis } from '@/app/lib/utils';
 import { lusitana } from '@/app/ui/fonts';
 
-export default async function RevenueChart({ revenue }: { revenue: Revenue[] }) {
+export default async function RevenueChart() {
+  const revenue = (await fetchRevenue()) as Revenue[];
   const chartHeight = 350;
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
 
