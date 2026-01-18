@@ -7,18 +7,20 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { updateInvoice } from '@/app/lib/action';
 import type { CustomerField, InvoiceForm } from '@/app/lib/definitions';
 import { Button } from '@/app/ui/button';
 
-export default function EditInvoiceForm({
-  invoice,
-  customers,
-}: {
+type EditInvoiceFormType = {
   invoice: InvoiceForm;
   customers: CustomerField[];
-}) {
+};
+
+export default function EditInvoiceForm({ invoice, customers }: EditInvoiceFormType) {
+  const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
+
   return (
-    <form>
+    <form action={updateInvoiceWithId}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
@@ -41,7 +43,7 @@ export default function EditInvoiceForm({
                 </option>
               ))}
             </select>
-            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-gray-500" />
           </div>
         </div>
 
@@ -61,7 +63,7 @@ export default function EditInvoiceForm({
                 placeholder="Enter USD amount"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
-              <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
         </div>
@@ -69,7 +71,7 @@ export default function EditInvoiceForm({
         {/* Invoice Status */}
         <fieldset>
           <legend className="mb-2 block text-sm font-medium">Set the invoice status</legend>
-          <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
+          <div className="rounded-md border border-gray-200 bg-white px-3.5 py-3">
             <div className="flex gap-4">
               <div className="flex items-center">
                 <input

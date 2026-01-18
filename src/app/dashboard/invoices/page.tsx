@@ -14,14 +14,14 @@ type Props = {
   }>;
 };
 
-export default async function Page(props: Props) {
+export default async function Page({ searchParams }: Props) {
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
         <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
       </div>
       <Suspense fallback={<InvoicesTableSkeleton />}>
-        <PageContent searchParamsPromise={props.searchParams} />
+        <PageContent searchParamsPromise={searchParams} />
       </Suspense>
     </div>
   );
@@ -32,8 +32,7 @@ type PageContentProps = {
 };
 
 async function PageContent({ searchParamsPromise }: PageContentProps) {
-  const searchParams = await searchParamsPromise;
-  const { query = '', page = '1' } = searchParams ?? {};
+  const { query = '', page = '1' } = (await searchParamsPromise) ?? {};
   const currentPage = Number(page);
   const totalPages = await fetchInvoicesPages(query);
 
