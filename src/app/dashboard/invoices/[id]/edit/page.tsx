@@ -10,11 +10,26 @@ type EditPageProps = {
   }>;
 };
 
-export default async function EditPage({ params }: EditPageProps) {
-  const { id } = await params;
-
+export default function EditPage({ params }: EditPageProps) {
   return (
     <main>
+      <Suspense fallback={<p>Loading...</p>}>
+        <EditPageContent params={params} />
+      </Suspense>
+    </main>
+  );
+}
+
+async function EditPageContent({ params }: EditPageProps) {
+  const { id } = await params;
+  const [invoice, customers] = await Promise.all([fetchInvoiceById(id), fetchCustomers()]);
+
+  if (!invoice) {
+    notFound();
+  }
+
+  return (
+    <>
       <Breadcrumbs
         breadcrumbs={[
           { label: 'Invoices', href: '/dashboard/invoices' },
@@ -25,19 +40,7 @@ export default async function EditPage({ params }: EditPageProps) {
           },
         ]}
       />
-      <Suspense fallback={<p>Loading...</p>}>
-        <EditPageContent id={id} />
-      </Suspense>
-    </main>
+      <Form invoice={invoice} customers={customers} />
+    </>
   );
-}
-
-async function EditPageContent({ id }: { id: string }) {
-  const [invoice, customers] = await Promise.all([fetchInvoiceById(id), fetchCustomers()]);
-
-  if (!invoice) {
-    notFound();
-  }
-
-  return <Form invoice={invoice} customers={customers} />;
 }
