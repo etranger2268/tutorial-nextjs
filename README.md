@@ -1,5 +1,7 @@
 # Next.js Tutorial
 
+<https://nextjs.org/learn/dashboard-app>
+
 ## 🚀 技術スタック
 
 - [Next.js](https://nextjs.org/)

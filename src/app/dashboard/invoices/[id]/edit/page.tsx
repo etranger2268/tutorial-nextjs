@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { fetchCustomers, fetchInvoiceById } from '@/app/lib/data';
@@ -8,6 +9,10 @@ type EditPageProps = {
   params: Promise<{
     id: string;
   }>;
+};
+
+export const metadata: Metadata = {
+  title: 'Edit',
 };
 
 export default function EditPage({ params }: EditPageProps) {
