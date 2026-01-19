@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { sql } from '@/app/ui/dashboard/db';
+import { sql } from '@/app/lib/db';
 import { customers, invoices, revenue, users } from '../lib/placeholder-data';
 
 async function seedUsers() {

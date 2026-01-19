@@ -7,6 +7,8 @@
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Biome](https://biomejs.dev/)
+- [Postgres.js](https://supabase.com/docs/guides/database/postgres-js)
+- [NextAuth](https://next-auth.js.org/)
 
 ## 🛠️ セットアップ
 

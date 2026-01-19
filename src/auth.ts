@@ -2,8 +2,8 @@ import bcrypt from 'bcrypt';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import z from 'zod';
+import { sql } from '@/app/lib/db';
 import type { User } from '@/app/lib/definitions';
-import { sql } from '@/app/ui/dashboard/db';
 import { authConfig } from '@/auth.config';
 
 const LoginSchema = z.object({

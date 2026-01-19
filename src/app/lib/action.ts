@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { AuthError } from 'next-auth';
 import { z } from 'zod';
-import { sql } from '@/app/ui/dashboard/db';
+import { sql } from '@/app/lib/db';
 import { signIn } from '@/auth';
 
 const FormSchema = z.object({

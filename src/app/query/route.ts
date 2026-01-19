@@ -1,4 +1,4 @@
-import { sql } from '@/app/ui/dashboard/db';
+import { sql } from '@/app/lib/db';
 
 async function listInvoices() {
   const data = await sql`
