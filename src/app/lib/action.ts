@@ -2,8 +2,10 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { AuthError } from 'next-auth';
 import { z } from 'zod';
 import { sql } from '@/app/ui/dashboard/db';
+import { signIn } from '@/auth';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -77,7 +79,7 @@ export const updateInvoice = async (id: string, prevState: State, formData: Form
   }
 
   const { customerId, amount, status } = validatedFields.data;
-  
+
   const amountInCents = amount * 100;
 
   try {
@@ -103,4 +105,21 @@ export const deleteInvoice = async (id: string) => {
 
   await sql`DELETE FROM invoices WHERE id = ${id}`;
   revalidatePath('/dashboard/invoices');
+};
+
+export const authenticate = async (prevState: string | undefined, formData: FormData) => {
+  try {
+    await signIn('credentials', formData);
+    return undefined;
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
 };
