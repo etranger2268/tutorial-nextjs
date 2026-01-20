@@ -1,6 +1,6 @@
 import '@/app/globals.css';
 import type { Metadata } from 'next';
-import { inter, notoSansJP } from '@/app/ui/fonts';
+import { inter, notoSansJP } from '@/app/lib/fonts';
 
 type RootLayoutProps = Readonly<{
   children: React.ReactNode;

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { lusitana } from '@/app/ui/fonts';
+import { lusitana } from '@/app/lib/fonts';
 
 interface Breadcrumb {
   label: string;

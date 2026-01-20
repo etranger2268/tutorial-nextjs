@@ -5,7 +5,7 @@ import { AtSymbolIcon, ExclamationCircleIcon, KeyIcon } from '@heroicons/react/2
 import { useSearchParams } from 'next/navigation';
 import { useActionState } from 'react';
 import { authenticate } from '@/app/lib/action';
-import { lusitana } from '@/app/ui/fonts';
+import { lusitana } from '@/app/lib/fonts';
 import { Button } from './button';
 
 export default function LoginForm() {
